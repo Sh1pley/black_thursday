@@ -38,14 +38,19 @@ class Invoice
 
   def is_paid_in_full?
     results = transactions.map { |transaction| transaction.result } 
-    if results.size == 0
+    are_these_paid results
+  end
+
+  def are_these_paid(results)
+    if results.size.eql? 0
       false
     elsif results.include?("failed")
       false
-    elsif results.each { |result| result.eql?("success")}
+    else
       true
     end
   end
+
 
   def determine_the_time(time_string)
     time = Time.new(0)
