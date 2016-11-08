@@ -19,6 +19,16 @@ class InvoiceRepository
     all.find { |invoice| invoice.id.eql?(id) }
   end
 
+  def fully_paid_invoices
+    fully_paid = []
+    all.each do |invoice|
+      if invoice.is_paid_in_full?
+        fully_paid << invoice
+      end
+    end
+    fully_paid
+  end
+
   def find_all_by_customer_id(customer_id)
     all.find_all { |invoice| invoice.customer_id.eql?(customer_id) }
   end
