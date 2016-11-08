@@ -58,8 +58,7 @@ class InvoiceTest < Minitest::Test
   end
 
   def test_it_knows_if_is_paid
-    assert @ir.all[1].is_paid_in_full?
-    refute @ir.all[0].is_paid_in_full?
+    assert_equal false, @ir.all[1].is_paid_in_full?
   end
 
   def test_it_can_find_items_for_an_invoice
