@@ -32,6 +32,11 @@ class Invoice
     result
   end
 
+  def invoice_items
+    ids = items.map { |item| item.id }
+    ids.map { |id| invoice_parent.parent.invoice_items.find_all_by_item_id(id) }
+  end
+
   def transactions
     invoice_parent.parent.transactions.find_all_by_invoice_id(id)
   end
@@ -51,6 +56,15 @@ class Invoice
     end
   end
 
+  def total
+    paid_transactions = invoice_parent.fully_paid_invoices
+    if paid_transactions.include?(self)
+      prices = invoice_items.map { |item| item[0].unit_price * item[0].quantity }
+      prices.reduce(&:+).round(2)
+    else
+      "$0.00"
+    end
+  end
 
   def determine_the_time(time_string)
     time = Time.new(0)
