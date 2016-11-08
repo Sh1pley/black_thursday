@@ -37,13 +37,29 @@ class Invoice
   end
 
   def is_paid_in_full?
-    status == :shipped
+    results = transactions.map { |transaction| transaction.result } 
+    if results.size == 0
+      false
+    elsif results.include?("failed")
+      false
+    elsif results.each { |result| result.eql?("success")}
+      true
+    end
   end
 
   def determine_the_time(time_string)
     time = Time.new(0)
     return time if time_string == ""
     time_string = Time.parse(time_string)
+  end
+
+  def customer
+    invoice_parent.parent.customers.find_by_id(customer_id)
+  end
+
+  def items
+    invoice_items = invoice_parent.parent.invoice_items.find_all_by_invoice_id(id)
+    invoice_items.map { |item| invoice_parent.parent.items.find_by_id(item.item_id) }
   end
 
 end
