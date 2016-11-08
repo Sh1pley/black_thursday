@@ -4,7 +4,7 @@ class InvoiceTest < Minitest::Test
     
   def setup
     @se = SalesEngine.from_csv({
-      :items => "./fixtures/items_small_list.csv",
+      :items => "./data/items.csv",
       :invoices => "./fixtures/invoices_small_list.csv",
       :merchants => "./fixtures/merchant_small_list.csv",
       :invoice_items => "./fixtures/invoice_item_small_list.csv",
@@ -66,13 +66,12 @@ class InvoiceTest < Minitest::Test
     invoice = @ir.find_by_id(2)
 
     assert_equal Array, invoice.items.class
-    # binding.pry
     assert_equal Item, invoice.items[0].class
   end
 
   # def test_it_can_find_transactions_from_invoice
   #   invoice = @ir.find_by_id(2)
-    
+  #   binding.pry
   #   invoice.transactions # => [transaction, transaction]
   #   invoice.customer # => customer
   #   end
