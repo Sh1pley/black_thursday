@@ -8,7 +8,8 @@ class Transaction
                 :credit_card_expiration_date,
                 :result,
                 :created_at,
-                :updated_at
+                :updated_at,
+                :transaction_parent
 
   def initialize(transaction_data, parent = nil)
     @transaction_parent          = parent
@@ -19,10 +20,6 @@ class Transaction
     @result                      = transaction_data[:result]
     @created_at                  = determine_the_time(transaction_data[:created_at])
     @updated_at                  = determine_the_time(transaction_data[:updated_at])
-  end
-
-  def merchant
-    @transaction_parent.parent.merchants.find_by_id(@merchant_id)
   end
 
   def find_unit_price(price)
@@ -42,6 +39,10 @@ class Transaction
     time = Time.new(0)
     return time if time_string == ""
     time_string = Time.parse(time_string)
+  end
+
+  def invoice
+    transaction_parent.parent.invoices.find_by_id(invoice_id)
   end
 
 end
