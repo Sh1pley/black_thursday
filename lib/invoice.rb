@@ -1,4 +1,5 @@
 require_relative 'invoice_repository'
+require 'pry'
 
 class Invoice
   attr_reader   :id,
@@ -24,7 +25,11 @@ class Invoice
   end
 
   def items
-    invoice_parent.parent.invoice_items.find_all_by_invoice_id(id)
+    id = invoice_parent.parent.items.find_all_by_merchant_id(@merchant_id)
+    result = id.map do |item|
+      invoice_parent.parent.items.find_by_id(item.id)
+    end
+    result
   end
 
   def transactions
