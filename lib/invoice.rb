@@ -47,12 +47,12 @@ class Invoice
   end
 
   def are_these_paid(results)
-    if results.size.eql? 0
-      false
-    elsif results.include?("failed")
+    if results.include?("success")
+      true
+    elsif results.size.eql? 0
       false
     else
-      true
+      false
     end
   end
 
