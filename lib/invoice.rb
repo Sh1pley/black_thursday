@@ -56,14 +56,17 @@ class Invoice
     end
   end
 
+  # def total
+  #   paid_transactions = invoice_parent.fully_paid_invoices
+  #   if paid_transactions.include?(self)
+  #   else
+  #     "$0.00"
+  #   end
+  # end
+
   def total
-    paid_transactions = invoice_parent.fully_paid_invoices
-    if paid_transactions.include?(self)
-      prices = invoice_items.map { |item| item[0].unit_price * item[0].quantity }
-      prices.reduce(&:+).round(2)
-    else
-      "$0.00"
-    end
+    prices = invoice_items.map { |item| item[0].unit_price * item[0].quantity }
+    prices.reduce(&:+)
   end
 
   def determine_the_time(time_string)

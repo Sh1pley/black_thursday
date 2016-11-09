@@ -10,22 +10,24 @@ class SalesAnalyst
   include AnalystHelper
   include AnalystOperations
   
-  attr_reader :sales_engine,
-              :merchants,
-              :invoices,
-              :items
+  attr_reader   :sales_engine,  :invoices,
+                :transactions,  :merchants,
+                :items
 
   def initialize(sales_engine)
-    @sales_engine   = sales_engine
-    @merchants      = sales_engine.merchants.all
-    @invoices       = sales_engine.invoices.all
-    @items          = sales_engine.items.all
-    @item_prices    = items.map { |item| item.unit_price }
-    @item_counts    = merchants.map { |merchant| merchant.items.size }
-    @invoice_counts = merchants.map { |merchant| merchant.invoices.size }
+    @sales_engine            = sales_engine
+    @merchants               = sales_engine.merchants.all
+    @invoices                = sales_engine.invoices.all
+    @items                   = sales_engine.items.all
+    @transactions            = sales_engine.transactions.all
+    @item_prices             = items.map { |item| item.unit_price }
+    @item_counts             = merchants.map { |merchant| merchant.items.size }
+    @invoice_counts          = merchants.map { |merchant| merchant.invoices.size }
+    @merchant_revenue        = Hash.new(decimal 0)
   end
 
   def average_items_per_merchant
+    # binding.pry
     format decimal average(@item_counts).to_s
   end
 
@@ -87,6 +89,10 @@ class SalesAnalyst
     items.find_all do |item|
       item.unit_price >= two_deviations_above
     end
+  end
+
+  def revenue_by_merchant(id)
+    @merchant_revenue[id]
   end
 
 end

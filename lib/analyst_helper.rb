@@ -34,6 +34,29 @@ module AnalystHelper
     collection.reduce(&:+).to_f / collection.size.to_f
   end
 
+  # def successful_transactions
+  #   transactions.find_all do |transaction|
+  #     transaction.result.eql?("success")
+  #   end
+  # end
+
+  # def successful_invoices
+  #   invoice_ids = successful_transactions.map { |transaction| transaction.invoice_id }
+  #   invoice_ids.map { |invoice_id| sales_engine.invoices.find_by_id(invoice_id) }
+  # end
+
+  def merchant_name(id)
+    merchant = sales_engine.invoices.find_by_id(id).merchant_id
+    sales_engine.merchants.find_by_id(merchant).name
+  end
+
+  def hash_maker
+    invoices.each do |invoice|
+      invoice_total = invoice.total
+      @merchant_revenue[invoice.merchant_id] += invoice_total
+    end
+  end
+    
   def days_of_the_week
     days = Hash.new(0)
     @invoices.each do |invoice|
