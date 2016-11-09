@@ -32,7 +32,7 @@ class Transaction
   end
 
   def unit_price_to_dollars(unit_price)
-    @unit_price.to_f
+    unit_price.to_f
   end
 
   def determine_the_time(time_string)
