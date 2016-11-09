@@ -22,6 +22,7 @@ class Transaction
     @updated_at                  = determine_the_time(transaction_data[:updated_at])
   end
 
+
   def find_unit_price(price)
     if unit_price == ""
       unit_price = BigDecimal.new(0)
@@ -42,6 +43,16 @@ class Transaction
   end
 
   def invoice
+    @transaction_parent.parent.invoices.find_by_id(invoice_id)
+  end
+
+  def find_unit_price(price)
+    if unit_price == ""
+      unit_price = BigDecimal.new(0)
+    else
+      unit_price = BigDecimal.new(price) / 100
+    end
+    unit_price
     transaction_parent.parent.invoices.find_by_id(invoice_id)
   end
 
