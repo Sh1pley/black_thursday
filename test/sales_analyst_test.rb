@@ -57,7 +57,12 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_it_can_find_golden_items
-    result = @sa.golden_items
+    assert_equal Item, @sa.golden_items[0].class
+  end
+
+  def test_it_can_locate_merchants_with_only_one_item
+    assert_equal Array, @sa.merchants_with_only_one_item.class
+    assert_equal Merchant, @sa.merchants_with_only_one_item[0].class
   end
 
 end
