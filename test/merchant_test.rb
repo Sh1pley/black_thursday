@@ -39,4 +39,19 @@ class MerchantTest < Minitest::Test
     assert_equal "2011-12-04", @merch.updated_at
   end
 
+  def test_it_can_find_customers
+    assert_equal Array, @merch.customers.class
+    assert_equal Customer, @merch.customers[0].class
+  end
+
+  def test_it_can_locate_invoices
+    assert_equal Array, @merch.invoices.class
+    assert_equal Invoice, @merch.invoices[0].class
+  end
+
+  def test_it_can_list_its_items
+    assert_equal Array, @merch.items.class
+    assert_equal Item, @merch.items[0].class
+  end
+
 end

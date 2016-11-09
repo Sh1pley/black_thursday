@@ -68,10 +68,16 @@ class InvoiceTest < Minitest::Test
     assert_equal Item, invoice.items[0].class
   end
 
-  # def test_it_can_find_transactions_from_invoice
-  #   invoice = @ir.find_by_id(2)
-  #   binding.pry
-  #   invoice.transactions # => [transaction, transaction]
-  #   invoice.customer # => customer
-  #   end
+  def test_it_can_find_transactions_from_invoice
+    invoice = @ir.find_by_id(5)
+
+    assert_equal Array, invoice.transactions.class
+    assert_equal Transaction, invoice.transactions[0].class
+  end
+
+  def test_it_can_find_customers_from_invoice_id
+    invoice = @ir.find_by_id(6)
+
+    assert_equal Customer, invoice.customer.class
+  end
 end

@@ -8,7 +8,8 @@ class Transaction
                 :credit_card_expiration_date,
                 :result,
                 :created_at,
-                :updated_at
+                :updated_at,
+                :transaction_parent
 
   def initialize(transaction_data, parent = nil)
     @transaction_parent          = parent
@@ -21,12 +22,18 @@ class Transaction
     @updated_at                  = determine_the_time(transaction_data[:updated_at])
   end
 
-  def merchant
-    @transaction_parent.parent.merchants.find_by_id(@merchant_id)
+
+  def find_unit_price(price)
+    if unit_price == ""
+      unit_price = BigDecimal.new(0)
+    else
+      unit_price = BigDecimal.new(price) / 100
+    end
+    unit_price
   end
 
   def unit_price_to_dollars(unit_price)
-    @unit_price.to_f
+    unit_price.to_f
   end
 
   def determine_the_time(time_string)
@@ -46,6 +53,7 @@ class Transaction
       unit_price = BigDecimal.new(price) / 100
     end
     unit_price
+    transaction_parent.parent.invoices.find_by_id(invoice_id)
   end
 
 end
