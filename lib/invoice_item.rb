@@ -8,7 +8,8 @@ class InvoiceItem
                 :quantity,
                 :unit_price,
                 :created_at,
-                :updated_at
+                :updated_at,
+                :invoice_parent
 
   def initialize(invoice_data, parent = nil)
     @invoice_parent = parent
@@ -19,10 +20,6 @@ class InvoiceItem
     @unit_price     = find_unit_price(invoice_data[:unit_price])
     @created_at     = determine_the_time(invoice_data[:created_at])
     @updated_at     = determine_the_time(invoice_data[:updated_at])
-  end
-
-  def merchant
-    @invoice_parent.parent.merchants.find_by_id(@merchant_id)
   end
 
   def find_unit_price(price)
