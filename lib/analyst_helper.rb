@@ -71,5 +71,33 @@ module AnalystHelper
     days
   end
 
+  def merchant_month(merchant)
+    if merchant.created_at[5..6] == "01"
+      "january"
+    elsif merchant.created_at[5..6] == "02"
+      "february"
+    elsif merchant.created_at[5..6] == "03"
+      "march"
+    elsif merchant.created_at[5..6] == "04"
+      "april"
+    elsif merchant.created_at[5..6] == "05"
+      "may"
+    elsif merchant.created_at[5..6] == "06"
+      "june"
+    elsif merchant.created_at[5..6] == "07"
+      "july"
+    elsif merchant.created_at[5..6] == "08"
+      "august"
+    elsif merchant.created_at[5..6] == "09"
+      "september"
+    elsif merchant.created_at[5..6] == "10"
+      "october"
+    elsif merchant.created_at[5..6] == "11"
+      "november"
+    elsif merchant.created_at[5..6] == "12"
+      "december"
+    end
+  end
+  
 end
 

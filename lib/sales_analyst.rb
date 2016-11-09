@@ -95,4 +95,22 @@ class SalesAnalyst
     @merchant_revenue[id]
   end
 
+  def merchants_with_only_one_item
+    merchants.find_all do |merchant|
+      merchant.items.count == 1
+    end
+  end
+
+  def merchants_with_only_one_item_registered_in_month(input_month)
+    results = []
+    merchants_with_only_one_item.each do |merchant|
+      if merchant_month(merchant) == input_month.downcase
+        results << merchant
+      else
+        nil
+      end
+    end
+    results.compact
+  end
+
 end

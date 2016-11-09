@@ -25,15 +25,6 @@ class Transaction
     @transaction_parent.parent.merchants.find_by_id(@merchant_id)
   end
 
-  def find_unit_price(price)
-    if unit_price == ""
-      unit_price = BigDecimal.new(0)
-    else
-      unit_price = BigDecimal.new(price) / 100
-    end
-    unit_price
-  end
-
   def unit_price_to_dollars(unit_price)
     @unit_price.to_f
   end
@@ -42,6 +33,19 @@ class Transaction
     time = Time.new(0)
     return time if time_string == ""
     time_string = Time.parse(time_string)
+  end
+
+  def invoice
+    @transaction_parent.parent.invoices.find_by_id(invoice_id)
+  end
+
+  def find_unit_price(price)
+    if unit_price == ""
+      unit_price = BigDecimal.new(0)
+    else
+      unit_price = BigDecimal.new(price) / 100
+    end
+    unit_price
   end
 
 end
