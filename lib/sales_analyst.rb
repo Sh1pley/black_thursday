@@ -89,4 +89,10 @@ class SalesAnalyst
     end
   end
 
+  def merchants_with_only_one_item
+    merchants.find_all do |merchant|
+      merchant.items.count == 1
+    end
+  end
+
 end
