@@ -41,6 +41,12 @@ class InvoiceRepository
     all.find_all { |invoice| invoice.status.eql?(status) }
   end
 
+  def find_all_by_date(date)
+    all.find_all do |invoice|
+      invoice.created_at.strftime("%Y-%m-%d") == date.strftime("%Y-%m-%d")
+    end
+  end
+
   def inspect
     "#<#{self.class} #{@all.size} rows>"
   end

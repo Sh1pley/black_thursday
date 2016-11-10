@@ -10,9 +10,9 @@ class SalesAnalyst
   include AnalystHelper
   include AnalystOperations
 
-  attr_reader   :sales_engine,  :invoices,
-                :transactions,  :merchants,
-                :items,         :invoice_items
+  attr_reader   :sales_engine,    :invoices,
+                :transactions,    :merchants,
+                :items,           :invoice_items
 
   def initialize(sales_engine)
     @sales_engine         = sales_engine
@@ -145,6 +145,23 @@ class SalesAnalyst
   def best_item_for_merchant(merchant_id)
     top_item = price_checker(merchant_id)
     sales_engine.items.find_by_id(top_item)
+  end
+
+  def merchants_ranked_by_revenue
+    ranked_merchants = merchant_revenues.map do |merchant|
+      sales_engine.merchants.find_by_id(merchant[0])
+    end
+  end
+
+  def top_revenue_earners(select = 20)
+      merchants_ranked_by_revenue.take(select)
+  end
+
+  def total_revenue_by_date(date)
+    sales_engine.invoices.find_all_by_date(date).reduce(0) do |revenue, invoice|
+      revenue += invoice.total
+      revenue
+    end
   end
 
 end

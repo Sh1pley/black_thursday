@@ -302,6 +302,12 @@
         null,
         null,
         1,
+        0,
+        0,
+        null,
+        null,
+        null,
+        1,
         1,
         null,
         null,
@@ -537,6 +543,23 @@
         0,
         null,
         null,
+        1,
+        0,
+        0,
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
         null
       ],
       "/Users/ethanbennett/Documents/Turing/mod-1/Projects/black_thursday/lib/standard_deviation.rb": [
@@ -761,6 +784,23 @@
         null,
         0,
         null,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        1,
+        0,
         null,
         null,
         null
@@ -1027,6 +1067,6 @@
         null
       ]
     },
-    "timestamp": 1478758576
+    "timestamp": 1478763470
   }
 }

@@ -45,8 +45,8 @@ module AnalystOperations
     end.compact
   end
 
-  def find_paid_items(id)
-    paid_invoices = find_paid_invoices_from_merchant(id)
+  def find_paid_items(merchant_id)
+    paid_invoices = find_paid_invoices_from_merchant(merchant_id)
     paid_invoices.map do |item|
       invoice_items.find_all_by_invoice_id(item)
     end.flatten
@@ -74,6 +74,23 @@ module AnalystOperations
       end
       item_ids
     end
+  end
+
+  def revenues(merchant_id)
+    items = find_paid_items(merchant_id)
+    merchant_revenue = revenue_operator(items)
+    [merchant_id, merchant_revenue]
+  end
+
+  def revenue_operator(items)
+    items.reduce(0) do |revenue, item|
+      revenue += (item.unit_price) * (item.quantity)
+      revenue
+    end
+  end
+
+  def merchant_revenues
+    merchants.map {|merchant| revenues(merchant.id)}.sort_by{|set| set[1]}.reverse
   end
 
 end
