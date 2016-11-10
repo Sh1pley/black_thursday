@@ -1,7 +1,7 @@
 module StandardDeviation
 
   def sum(num_set)
-    (num_set).inject(0){|accum, int| accum + int }
+    (num_set).inject(0){ |accum, int| accum + int }
   end
 
   def mean(num_set)

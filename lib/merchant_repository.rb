@@ -2,12 +2,12 @@ require_relative 'merchant'
 require 'pry'
 
 class MerchantRepository
-  attr_reader   :all,
-                :parent
+  attr_reader   :revenue_hash,  :parent,
+                :invoices,      :all
 
   def initialize(merchants_data, parent = nil)
     @parent = parent
-    @all = populate(merchants_data)
+    @all    = populate(merchants_data)
   end
 
   def populate(merchants_data)

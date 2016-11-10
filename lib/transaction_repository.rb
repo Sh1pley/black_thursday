@@ -25,7 +25,9 @@ class TransactionRepository
   end
 
   def find_all_by_credit_card_number(credit_card_number)
-    all.find_all { |transaction| transaction.credit_card_number.eql?(credit_card_number) }
+    all.find_all do |transaction|
+      transaction.credit_card_number.eql?(credit_card_number)
+    end
   end
 
   def find_all_by_result(result)

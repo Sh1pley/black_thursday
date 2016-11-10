@@ -7,7 +7,7 @@ module AnalystHelper
   def format(number)
     number.round(2).to_f
   end
-  
+
   def price_compiler(id)
     merchant_items = sales_engine.find_all_items_by_merchant_id(id)
     no_prices                  if merchant_items.size == 0
@@ -34,29 +34,22 @@ module AnalystHelper
     collection.reduce(&:+).to_f / collection.size.to_f
   end
 
-  # def successful_transactions
-  #   transactions.find_all do |transaction|
-  #     transaction.result.eql?("success")
-  #   end
-  # end
-
-  # def successful_invoices
-  #   invoice_ids = successful_transactions.map { |transaction| transaction.invoice_id }
-  #   invoice_ids.map { |invoice_id| sales_engine.invoices.find_by_id(invoice_id) }
-  # end
-
   def merchant_name(id)
-    merchant = sales_engine.invoices.find_by_id(id).merchant_id
-    sales_engine.merchants.find_by_id(merchant).name
+    sales_engine.merchants.find_by_id(id).name
   end
 
-  def hash_maker
-    invoices.each do |invoice|
+  def ranked_merchants
+    merchant_revenue.sort_by { |merchant_id, revenue| revenue }
+  end
+
+  def revenue_hash_maker
+    invoices.reduce(Hash.new(decimal 0)) do |money, invoice|
       invoice_total = invoice.total
-      @merchant_revenue[invoice.merchant_id] += invoice_total
+      money[invoice.merchant_id] += invoice_total
+      money
     end
   end
-    
+
   def days_of_the_week
     days = Hash.new(0)
     @invoices.each do |invoice|
@@ -98,6 +91,6 @@ module AnalystHelper
       "december"
     end
   end
-  
+
 end
 

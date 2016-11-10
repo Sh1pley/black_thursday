@@ -27,7 +27,7 @@ class Merchant
   def customers
     customer_ids = invoices.map {|invoice| invoice.customer_id}
     customers = customer_ids.map do |customer|
-      merchant_parent.parent.customers.find_by_id(customer)  # => can we make this 80 chars?/one line
+      merchant_parent.parent.customers.find_by_id(customer)
     end
     customers.uniq
   end

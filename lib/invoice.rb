@@ -2,12 +2,9 @@ require_relative 'invoice_repository'
 require 'pry'
 
 class Invoice
-  attr_reader   :id,
-                :customer_id,
-                :merchant_id,
-                :status,
-                :created_at,
-                :updated_at,
+  attr_reader   :customer_id,   :id,
+                :merchant_id,   :status,
+                :created_at,    :updated_at,
                 :invoice_parent
 
   def initialize(invoice_data, parent = nil)
@@ -42,7 +39,7 @@ class Invoice
   end
 
   def is_paid_in_full?
-    results = transactions.map { |transaction| transaction.result } 
+    results = transactions.map { |transaction| transaction.result }
     are_these_paid results
   end
 
@@ -55,14 +52,6 @@ class Invoice
       false
     end
   end
-
-  # def total
-  #   paid_transactions = invoice_parent.fully_paid_invoices
-  #   if paid_transactions.include?(self)
-  #   else
-  #     "$0.00"
-  #   end
-  # end
 
   def total
     prices = invoice_items.map { |item| item[0].unit_price * item[0].quantity }
@@ -80,8 +69,10 @@ class Invoice
   end
 
   def items
-    invoice_items = invoice_parent.parent.invoice_items.find_all_by_invoice_id(id)
-    invoice_items.map { |item| invoice_parent.parent.items.find_by_id(item.item_id) }
+    items = invoice_parent.parent.invoice_items.find_all_by_invoice_id(id)
+    items.map do |item|
+      invoice_parent.parent.items.find_by_id(item.item_id)
+    end
   end
 
 end
