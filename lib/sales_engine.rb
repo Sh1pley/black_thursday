@@ -6,15 +6,11 @@ require_relative 'invoice_item_repository'
 require_relative 'customer_repository'
 require_relative 'transaction_repository'
 require 'csv'
-require 'pry'
 
 class SalesEngine
-  attr_reader   :merchants,
-                :items,
-                :invoices,
-                :invoice_items,
-                :transactions,
-                :customers,
+  attr_reader   :merchants,     :items,
+                :invoices,      :invoice_items,
+                :transactions,  :customers,
                 :raw_data
 
   def initialize(all_file_paths)

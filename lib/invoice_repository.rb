@@ -1,5 +1,4 @@
 require_relative 'invoice'
-require 'pry'
 
 class InvoiceRepository
   attr_reader   :invoice,
@@ -8,7 +7,7 @@ class InvoiceRepository
 
   def initialize(invoice_data, parent = nil)
     @parent = parent
-    @all = populate(invoice_data)
+    @all    = populate(invoice_data)
   end
 
   def populate(invoice_data)
@@ -39,6 +38,12 @@ class InvoiceRepository
 
   def find_all_by_status(status)
     all.find_all { |invoice| invoice.status.eql?(status) }
+  end
+
+  def find_all_by_date(date)
+    all.find_all do |invoice|
+      invoice.created_at.strftime("%Y-%m-%d") == date.strftime("%Y-%m-%d")
+    end
   end
 
   def inspect

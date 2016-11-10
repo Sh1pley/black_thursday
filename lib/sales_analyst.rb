@@ -2,32 +2,30 @@ require_relative 'sales_engine'
 require_relative 'standard_deviation'
 require_relative 'analyst_helper'
 require_relative 'analyst_operations'
-require 'bigdecimal'
-require 'pry'
 
 class SalesAnalyst
   include StandardDeviation
   include AnalystHelper
   include AnalystOperations
-  
-  attr_reader   :sales_engine,  :invoices,
-                :transactions,  :merchants,
-                :items
+
+  attr_reader   :sales_engine,    :invoices,
+                :transactions,    :merchants,
+                :items,           :invoice_items
 
   def initialize(sales_engine)
-    @sales_engine            = sales_engine
-    @merchants               = sales_engine.merchants.all
-    @invoices                = sales_engine.invoices.all
-    @items                   = sales_engine.items.all
-    @transactions            = sales_engine.transactions.all
-    @item_prices             = items.map { |item| item.unit_price }
-    @item_counts             = merchants.map { |merchant| merchant.items.size }
-    @invoice_counts          = merchants.map { |merchant| merchant.invoices.size }
-    @merchant_revenue        = Hash.new(decimal 0)
+    @sales_engine         = sales_engine
+    @merchants            = sales_engine.merchants.all
+    @invoices             = sales_engine.invoices.all
+    @items                = sales_engine.items.all
+    @transactions         = sales_engine.transactions.all
+    @invoice_items        = sales_engine.invoice_items
+    @item_prices          = items.map { |item| item.unit_price }
+    @item_counts          = merchants.map { |merchant| merchant.items.size }
+    @invoice_counts       = merchants.map { |merchant| merchant.invoices.size }
+    @merchant_revenue     = Hash.new(decimal 0)
   end
 
   def average_items_per_merchant
-    # binding.pry
     format decimal average(@item_counts).to_s
   end
 
@@ -57,7 +55,7 @@ class SalesAnalyst
 
   def merchants_with_high_item_count
     one_deviation_above = item_number_plus_one_deviation
-    @merchants.find_all do |merchant|
+    merchants.find_all do |merchant|
       merchant.items.count >= one_deviation_above
     end
   end
@@ -71,7 +69,7 @@ class SalesAnalyst
 
   def top_merchants_by_invoice_count
     one_deviation_above = one_standard_deviation_above_invoice_average
-    merchant_list = @merchants.find_all do |merchant|
+    merchant_list       = merchants.find_all do |merchant|
       merchant.invoices.size >= one_deviation_above
     end
   merchant_list.flatten
@@ -113,26 +111,38 @@ class SalesAnalyst
     results.compact
   end
 
-  def merchants_invoices
-    merchant_ids = merchants.map {|merchant| merchant.id}
-    merchant_ids.map {|id| sales_engine.invoices.find_all_by_merchant_id(id)}.flatten
-  end
-
-  def pending_invoices
-    pending = []
-    merchants_invoices.each do |invoice| 
-      if !invoice.is_paid_in_full?
-        pending << invoice
-      end
-    end
-    pending.flatten.compact.uniq
-  end
-
   def merchants_with_pending_invoices
-    results = pending_invoices.map do |invoice| 
-      sales_engine.merchants.find_by_id(invoice.merchant_id) 
+      results = pending_invoices.map do |invoice|
+      sales_engine.merchants.find_by_id(invoice.merchant_id)
     end
     results.uniq
+  end
+
+  def most_sold_item_for_merchant(merchant_id)
+    ranked_items = rank_invoice_items_by_quantity(merchant_id)
+    ranked_items.map { |item| sales_engine.items.find_by_id(item.item_id) }
+  end
+
+  def best_item_for_merchant(merchant_id)
+    top_item = price_checker(merchant_id)
+    sales_engine.items.find_by_id(top_item)
+  end
+
+  def merchants_ranked_by_revenue
+    ranked_merchants = merchant_revenues.map do |merchant|
+      sales_engine.merchants.find_by_id(merchant[0])
+    end
+  end
+
+  def top_revenue_earners(select = 20)
+      merchants_ranked_by_revenue.take(select)
+  end
+
+  def total_revenue_by_date(date)
+    sales_engine.invoices.find_all_by_date(date).reduce(0) do |revenue, invoice|
+      revenue += invoice.total
+      revenue
+    end
   end
 
 end

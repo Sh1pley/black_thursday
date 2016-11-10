@@ -1,25 +1,19 @@
-require 'time'
-require 'bigdecimal'
-
 class Transaction
-  attr_reader   :id,
-                :invoice_id,
-                :credit_card_number,
-                :credit_card_expiration_date,
-                :result,
-                :created_at,
-                :updated_at,
-                :transaction_parent
+  attr_reader   :invoice_id,  :credit_card_number,
+                :id,          :result,
+                :created_at,  :transaction_parent,
+                :updated_at,  :credit_card_expiration_date
 
   def initialize(transaction_data, parent = nil)
-    @transaction_parent          = parent
-    @id                          = transaction_data[:id].to_i
-    @invoice_id                  = transaction_data[:invoice_id].to_i
-    @credit_card_number          = transaction_data[:credit_card_number].to_i
-    @credit_card_expiration_date = transaction_data[:credit_card_expiration_date]
-    @result                      = transaction_data[:result]
-    @created_at                  = determine_the_time(transaction_data[:created_at])
-    @updated_at                  = determine_the_time(transaction_data[:updated_at])
+    @transaction_parent    = parent
+    @id                    = transaction_data[:id].to_i
+    @invoice_id            = transaction_data[:invoice_id].to_i
+    @credit_card_number    = transaction_data[:credit_card_number].to_i
+    @result                = transaction_data[:result]
+    @created_at            = determine_the_time(transaction_data[:created_at])
+    @updated_at            = determine_the_time(transaction_data[:updated_at])
+    @credit_card_expiration_date =
+    transaction_data[:credit_card_expiration_date]
   end
 
 

@@ -1,14 +1,12 @@
 require_relative 'customer'
-require 'pry'
 
 class CustomerRepository
-
   attr_reader   :parent,
                 :all
 
   def initialize(customer_data, parent = nil)
     @parent = parent
-    @all = populate(customer_data)
+    @all    = populate(customer_data)
   end
 
   def populate(customer_data)
@@ -20,14 +18,19 @@ class CustomerRepository
   end
 
   def find_all_by_first_name(first_name)
-    all.find_all {|customer| customer.first_name.downcase.include?(first_name.downcase)}
+    all.find_all do |customer|
+      customer.first_name.downcase.include?(first_name.downcase)
+    end
   end
 
   def find_all_by_last_name(last_name)
-    all.find_all {|customer| customer.last_name.downcase.include?(last_name.downcase)}
+    all.find_all do |customer|
+      customer.last_name.downcase.include?(last_name.downcase)
+    end
   end
 
   def inspect
     "#<#{self.class} #{merchants.size} rows>"
   end
+
 end

@@ -1,6 +1,3 @@
-require 'time'
-require 'bigdecimal'
-
 class Customer
   attr_reader   :id,
                 :first_name,
@@ -11,11 +8,11 @@ class Customer
 
   def initialize(customer_data, parent = nil)
     @customer_parent = parent
-    @id             = customer_data[:id].to_i
-    @first_name     = customer_data[:first_name]
-    @last_name      = customer_data[:last_name]
-    @created_at     = determine_the_time(customer_data[:created_at])
-    @updated_at     = determine_the_time(customer_data[:updated_at])
+    @id              = customer_data[:id].to_i
+    @first_name      = customer_data[:first_name]
+    @last_name       = customer_data[:last_name]
+    @created_at      = determine_the_time(customer_data[:created_at])
+    @updated_at      = determine_the_time(customer_data[:updated_at])
   end
 
   def determine_the_time(time_string)

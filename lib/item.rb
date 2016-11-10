@@ -1,14 +1,11 @@
-require_relative '../lib/item_repository'
+require_relative 'item_repository'
 require 'bigdecimal'
 require 'time'
 
 class Item
-  attr_reader   :name,
-                :description,
-                :unit_price,
-                :created_at,
-                :updated_at,
-                :merchant_id,
+  attr_reader   :description,  :name,
+                :unit_price,   :created_at,
+                :updated_at,   :merchant_id,
                 :id
 
   def initialize(item_data, parent = nil)
