@@ -1,14 +1,12 @@
 require_relative 'customer'
-require 'pry'
 
 class CustomerRepository
-
   attr_reader   :parent,
                 :all
 
   def initialize(customer_data, parent = nil)
     @parent = parent
-    @all = populate(customer_data)
+    @all    = populate(customer_data)
   end
 
   def populate(customer_data)
@@ -34,4 +32,5 @@ class CustomerRepository
   def inspect
     "#<#{self.class} #{merchants.size} rows>"
   end
+
 end

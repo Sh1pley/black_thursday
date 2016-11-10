@@ -2,8 +2,6 @@ require_relative 'sales_engine'
 require_relative 'standard_deviation'
 require_relative 'analyst_helper'
 require_relative 'analyst_operations'
-require 'bigdecimal'
-require 'pry'
 
 class SalesAnalyst
   include StandardDeviation

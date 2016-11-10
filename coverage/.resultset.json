@@ -10,13 +10,9 @@
         1,
         1,
         1,
-        1,
         null,
         1,
         1,
-        null,
-        null,
-        null,
         null,
         null,
         null,
@@ -57,7 +53,6 @@
         null
       ],
       "/Users/ethanbennett/Documents/Turing/mod-1/Projects/black_thursday/lib/merchant_repository.rb": [
-        1,
         1,
         null,
         1,
@@ -121,8 +116,6 @@
         null,
         null,
         null,
-        null,
-        null,
         1,
         12672,
         12672,
@@ -150,7 +143,6 @@
         null
       ],
       "/Users/ethanbennett/Documents/Turing/mod-1/Projects/black_thursday/lib/item_repository.rb": [
-        1,
         1,
         null,
         1,
@@ -218,9 +210,6 @@
         null,
         null,
         null,
-        null,
-        null,
-        null,
         1,
         47042,
         47042,
@@ -258,7 +247,6 @@
         null
       ],
       "/Users/ethanbennett/Documents/Turing/mod-1/Projects/black_thursday/lib/invoice_repository.rb": [
-        1,
         1,
         null,
         1,
@@ -314,7 +302,6 @@
         null
       ],
       "/Users/ethanbennett/Documents/Turing/mod-1/Projects/black_thursday/lib/invoice.rb": [
-        1,
         1,
         null,
         1,
@@ -394,8 +381,6 @@
         null
       ],
       "/Users/ethanbennett/Documents/Turing/mod-1/Projects/black_thursday/lib/sales_analyst.rb": [
-        1,
-        1,
         1,
         1,
         1,
@@ -507,23 +492,6 @@
         null,
         null,
         0,
-        null,
-        null,
-        1,
-        200,
-        null,
-        198,
-        2,
-        null,
-        null,
-        1,
-        2,
-        2,
-        4,
-        4,
-        null,
-        null,
-        2,
         null,
         null,
         1,
@@ -788,6 +756,10 @@
         null,
         1,
         0,
+        null,
+        null,
+        1,
+        0,
         0,
         0,
         null,
@@ -800,17 +772,28 @@
         null,
         null,
         1,
-        0,
+        2,
+        2,
+        4,
+        4,
+        null,
+        null,
+        2,
+        null,
+        null,
+        1,
+        200,
+        null,
+        198,
+        2,
         null,
         null,
         null
       ],
       "/Users/ethanbennett/Documents/Turing/mod-1/Projects/black_thursday/lib/invoice_item_repository.rb": [
         1,
-        1,
         null,
         1,
-        null,
         1,
         null,
         null,
@@ -838,17 +821,12 @@
         1,
         0,
         null,
+        null,
         null
       ],
       "/Users/ethanbennett/Documents/Turing/mod-1/Projects/black_thursday/lib/invoice_item.rb": [
         1,
         1,
-        null,
-        1,
-        1,
-        null,
-        null,
-        null,
         null,
         null,
         null,
@@ -888,10 +866,8 @@
       ],
       "/Users/ethanbennett/Documents/Turing/mod-1/Projects/black_thursday/lib/customer_repository.rb": [
         1,
-        1,
         null,
         1,
-        null,
         1,
         null,
         null,
@@ -923,12 +899,10 @@
         1,
         0,
         null,
+        null,
         null
       ],
       "/Users/ethanbennett/Documents/Turing/mod-1/Projects/black_thursday/lib/customer.rb": [
-        1,
-        1,
-        null,
         1,
         1,
         null,
@@ -968,10 +942,8 @@
       ],
       "/Users/ethanbennett/Documents/Turing/mod-1/Projects/black_thursday/lib/transaction_repository.rb": [
         1,
-        1,
         null,
         1,
-        null,
         1,
         null,
         null,
@@ -1006,12 +978,10 @@
         1,
         0,
         null,
+        null,
         null
       ],
       "/Users/ethanbennett/Documents/Turing/mod-1/Projects/black_thursday/lib/transaction.rb": [
-        1,
-        1,
-        null,
         1,
         1,
         null,
@@ -1067,6 +1037,6 @@
         null
       ]
     },
-    "timestamp": 1478763470
+    "timestamp": 1478766619
   }
 }

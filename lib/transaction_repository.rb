@@ -1,8 +1,6 @@
 require_relative 'transaction'
-require 'pry'
 
 class TransactionRepository
-
   attr_reader   :parent,
                 :all
 
@@ -37,4 +35,5 @@ class TransactionRepository
   def inspect
     "#<#{self.class} #{merchants.size} rows>"
   end
+
 end

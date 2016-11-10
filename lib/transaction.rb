@@ -1,6 +1,3 @@
-require 'time'
-require 'bigdecimal'
-
 class Transaction
   attr_reader   :invoice_id,  :credit_card_number,
                 :id,          :result,

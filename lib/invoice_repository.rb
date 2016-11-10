@@ -1,5 +1,4 @@
 require_relative 'invoice'
-require 'pry'
 
 class InvoiceRepository
   attr_reader   :invoice,
@@ -8,7 +7,7 @@ class InvoiceRepository
 
   def initialize(invoice_data, parent = nil)
     @parent = parent
-    @all = populate(invoice_data)
+    @all    = populate(invoice_data)
   end
 
   def populate(invoice_data)

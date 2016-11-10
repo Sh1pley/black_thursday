@@ -1,5 +1,4 @@
 require_relative 'item'
-require 'pry'
 
 class ItemRepository
   attr_reader   :all,
@@ -7,7 +6,7 @@ class ItemRepository
 
   def initialize(item_data, parent = nil)
     @parent = parent
-    @all = populate(item_data)
+    @all    = populate(item_data)
   end
 
   def populate(item_data)

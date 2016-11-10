@@ -6,6 +6,7 @@ GEM
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
+    bigdecimal (1.2.8)
     cane (3.0.0)
       parallel
     codeclimate-engine-rb (0.4.0)
@@ -51,6 +52,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bigdecimal
   cane
   minitest
   pry

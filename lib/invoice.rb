@@ -1,5 +1,4 @@
 require_relative 'invoice_repository'
-require 'pry'
 
 class Invoice
   attr_reader   :customer_id,   :id,
@@ -40,10 +39,10 @@ class Invoice
 
   def is_paid_in_full?
     results = transactions.map { |transaction| transaction.result }
-    are_these_paid results
+    are_these_paid?(results)
   end
 
-  def are_these_paid(results)
+  def are_these_paid?(results)
     if results.include?("success")
       true
     elsif results.size.eql? 0

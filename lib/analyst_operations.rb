@@ -76,6 +76,11 @@ module AnalystOperations
     end
   end
 
+  def merchant_revenues
+    revenues = merchants.map {|merchant| revenues(merchant.id)}
+    revenues.sort_by{|set| set[1]}.reverse
+  end
+
   def revenues(merchant_id)
     items = find_paid_items(merchant_id)
     merchant_revenue = revenue_operator(items)
@@ -89,8 +94,21 @@ module AnalystOperations
     end
   end
 
-  def merchant_revenues
-    merchants.map {|merchant| revenues(merchant.id)}.sort_by{|set| set[1]}.reverse
+  def pending_invoices
+    pending = []
+    merchants_invoices.each do |invoice|
+      if !invoice.is_paid_in_full?
+        pending << invoice
+      end
+    end
+    pending.flatten.compact.uniq
+  end
+
+  def merchants_invoices
+    merchant_ids = merchants.map {|merchant| merchant.id}
+    merchant_ids.map do |id|
+      sales_engine.invoices.find_all_by_merchant_id(id).flatten
+    end.flatten
   end
 
 end

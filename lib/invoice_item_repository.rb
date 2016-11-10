@@ -1,14 +1,12 @@
 require_relative 'invoice_item'
-require 'pry'
 
 class InvoiceItemRepository
-
   attr_reader   :parent,
                 :all
 
   def initialize(invoice_item_data, parent = nil)
     @parent = parent
-    @all = populate(invoice_item_data)
+    @all    = populate(invoice_item_data)
   end
 
   def populate(invoice_item_data)
@@ -30,4 +28,5 @@ class InvoiceItemRepository
   def inspect
     "#<#{self.class} #{merchants.size} rows>"
   end
+
 end

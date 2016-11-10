@@ -1,15 +1,9 @@
-require 'time'
-require 'bigdecimal'
-
 class InvoiceItem
-  attr_reader   :id,
-                :item_id,
-                :invoice_id,
-                :quantity,
-                :unit_price,
-                :created_at,
-                :updated_at,
-                :invoice_parent
+  attr_reader   :item_id,     :invoice_id,
+                :quantity,    :unit_price,
+                :created_at,  :invoice_parent,
+                :updated_at,  :all,
+                :id
 
   def initialize(invoice_data, parent = nil)
     @invoice_parent = parent

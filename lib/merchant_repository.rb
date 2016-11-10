@@ -1,5 +1,4 @@
 require_relative 'merchant'
-require 'pry'
 
 class MerchantRepository
   attr_reader   :revenue_hash,  :parent,
