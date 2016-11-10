@@ -2,10 +2,6 @@ require 'rake'
 require 'rake/testtask'
 require 'rake'
 
-Rake::TestTask.new do |t|
-  t.libs << "test"
-  t.test_files = FileList['test/*.rb'].exclude("test/test_helper.rb")
-end
 task default: :test
 namespace :sanitation do
   desc "Check line lengths & whitespace with Cane"
@@ -28,4 +24,12 @@ namespace :sanitation do
 
   desc "Check both line length and method length"
   task :all => [:lines, :methods]
+  end
+
+Rake::TestTask.new do |test|
+  test.libs << 'test'
+  test.warning = false
+  test.verbose = false
+  test.test_files = FileList['test/*_test.rb'].exclude("test/test_helper.rb")
 end
+task default: :test

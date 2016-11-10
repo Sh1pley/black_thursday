@@ -70,4 +70,47 @@ class SalesAnalystTest < Minitest::Test
     assert_equal Merchant, @sa.merchants_with_pending_invoices[0].class
   end
 
+def test_it_can_find_most_sold_items
+      engine = SalesEngine.from_csv({
+        :items => "./data/items.csv",
+        :invoices => "./data/invoices.csv",
+        :merchants => "./data/merchants.csv",
+        :invoice_items => "./data/invoice_items.csv",
+        :transactions => "./data/transactions.csv",
+        :customers => "./data/customers.csv"
+      })
+    san = SalesAnalyst.new(engine)
+    
+    assert_equal Array, san.most_sold_item_for_merchant(san.merchants[3].id).class
+    assert_equal Item, san.most_sold_item_for_merchant(san.merchants[3].id)[0].class
+  end
+
+  def test_it_can_best_item_for_merchant
+    engine = SalesEngine.from_csv({
+      :items => "./data/items.csv",
+      :invoices => "./data/invoices.csv",
+      :merchants => "./data/merchants.csv",
+      :invoice_items => "./data/invoice_items.csv",
+      :transactions => "./data/transactions.csv",
+      :customers => "./data/customers.csv"
+    })
+    san = SalesAnalyst.new(engine)
+    
+    assert_equal Item, san.best_item_for_merchant(san.merchants[0].id).class
+  end
+
+  def test_for_top_revenue_earners
+    engine = SalesEngine.from_csv({
+      :items => "./data/items.csv",
+      :invoices => "./data/invoices.csv",
+      :merchants => "./data/merchants.csv",
+      :invoice_items => "./data/invoice_items.csv",
+      :transactions => "./data/transactions.csv",
+      :customers => "./data/customers.csv"
+    })
+    san = SalesAnalyst.new(engine)
+
+    assert_equal Array, san.top_revenue_earners.class
+    assert_equal Merchant, san.top_revenue_earners[0].class
+  end
 end
