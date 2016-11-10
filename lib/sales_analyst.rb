@@ -113,23 +113,6 @@ class SalesAnalyst
     results.compact
   end
 
-  def merchants_invoices
-    merchant_ids = merchants.map {|merchant| merchant.id}
-    merchant_ids.map do |id|
-      sales_engine.invoices.find_all_by_merchant_id(id).flatten
-    end.flatten
-  end
-
-  def pending_invoices
-    pending = []
-    merchants_invoices.each do |invoice|
-      if !invoice.is_paid_in_full?
-        pending << invoice
-      end
-    end
-    pending.flatten.compact.uniq
-  end
-
   def merchants_with_pending_invoices
       results = pending_invoices.map do |invoice|
       sales_engine.merchants.find_by_id(invoice.merchant_id)
